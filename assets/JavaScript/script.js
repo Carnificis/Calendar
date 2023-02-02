@@ -3,6 +3,7 @@
 // in the html.
 $(function () {
   var htmlString = "";
+  var currentHour = dayjs().hour()
   for (let i = 9; i <= 17; i++) {
     if (i < 12) {
       var displayTimeBlock = i + "AM";
@@ -12,7 +13,14 @@ $(function () {
       var displayTimeBlock = i - 12 + "PM";
     }
     var storedData = localStorage.getItem("hour-"+i) || "" // generate key
-    htmlString += `  <div id="hour-${i}" class="row time-block">
+    if(currentHour < i){
+        var color = "future"
+    }else if(currentHour === i){
+        var color = "present"
+    }else {
+        var color = "past"
+    }
+    htmlString += `  <div id="hour-${i}" class="row time-block ${color}">
         <div class="col-2 col-md-1 hour text-center py-3">${displayTimeBlock}</div>
         <textarea class="col-8 col-md-10 description" value="${storedData}" placeholder="${storedData}" rows="3"> ${storedData}</textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save">
