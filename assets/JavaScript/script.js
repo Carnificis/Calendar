@@ -4,6 +4,7 @@
 $(function () {
   var htmlString = "";
   var currentHour = dayjs().hour()
+  $("#currentDay").text(dayjs().format("DD  MMMM, YYYY"))
   for (let i = 9; i <= 17; i++) {
     if (i < 12) {
       var displayTimeBlock = i + "AM";
